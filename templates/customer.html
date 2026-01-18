@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}顾客端 - 聚香园{% endblock %}
+{% block nav_title %}顾客端{% endblock %}
+
+{% block content %}
+<div class="customer-page">
+    <!-- 未绑定桌位时显示 -->
+    <div id="bind-section" class="section">
+        <h2>选择桌位</h2>
+        <div id="tables-grid" class="tables-grid"></div>
+    </div>
+    
+    <!-- 已绑定桌位后显示 -->
+    <div id="order-section" class="section" style="display:none;">
+        <div class="table-info">
+            <span>当前桌位: <strong id="current-table"></strong></span>
+            <button onclick="unbindTable()" class="btn btn-sm">更换桌位</button>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('menu')">菜单</button>
+            <button class="tab" onclick="switchTab('cart')">当前订单 <span id="cart-count" class="badge">0</span></button>
+            <button class="tab" onclick="switchTab('orders')">已点菜品</button>
+        </div>
+        
+        <!-- 菜单 -->
+        <div id="menu-tab" class="tab-content active">
+            <div class="category-filter">
+                <button class="filter-btn active" onclick="filterCategory('all')">全部</button>
+                <button class="filter-btn" onclick="filterCategory('热菜')">热菜</button>
+                <button class="filter-btn" onclick="filterCategory('凉菜')">凉菜</button>
+                <button class="filter-btn" onclick="filterCategory('汤羹')">汤羹</button>
+                <button class="filter-btn" onclick="filterCategory('主食')">主食</button>
+                <button class="filter-btn" onclick="filterCategory('酒水')">酒水</button>
+            </div>
+            <div id="menu-list" class="menu-list"></div>
+        </div>
+        
+        <!-- 购物车/当前订单 -->
+        <div id="cart-tab" class="tab-content">
+            <div id="cart-list" class="cart-list"></div>
+            <div class="cart-footer">
+                <div class="cart-total">合计: <span id="cart-total">¥0.00</span></div>
+                <button onclick="submitOrder()" class="btn btn-primary">通知服务员确认</button>
+            </div>
+        </div>
+        
+        <!-- 已点菜品 -->
+        <div id="orders-tab" class="tab-content">
+            <div id="orders-list" class="orders-list"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/customer.js"></script>
+{% endblock %}

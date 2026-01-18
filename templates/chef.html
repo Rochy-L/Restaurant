@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}后厨端 - 聚香园{% endblock %}
+{% block nav_title %}后厨端{% endblock %}
+
+{% block content %}
+<div class="chef-page">
+    <div class="station-tabs">
+        <button class="station-tab active" onclick="switchStation('all')">全部订单</button>
+        <button class="station-tab" onclick="switchStation('cold')">凉菜房 (凉菜/酒水)</button>
+        <button class="station-tab" onclick="switchStation('hot')">热菜房 (热菜/汤羹/主食)</button>
+    </div>
+    
+    <div class="orders-container">
+        <div class="orders-header">
+            <h3>待处理订单</h3>
+            <button onclick="refreshOrders()" class="btn">刷新</button>
+        </div>
+        
+        <div id="kitchen-orders" class="kitchen-orders"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/chef.js"></script>
+{% endblock %}

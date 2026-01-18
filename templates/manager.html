@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}经理端 - 聚香园{% endblock %}
+{% block nav_title %}经理端{% endblock %}
+
+{% block content %}
+<div class="manager-page">
+    <div class="tabs">
+        <button class="tab active" onclick="switchManagerTab('dishes')">菜品管理</button>
+        <button class="tab" onclick="switchManagerTab('revenue')">营收统计</button>
+    </div>
+    
+    <!-- 菜品管理 -->
+    <div id="dishes-tab" class="tab-content active">
+        <div class="section-header">
+            <h3>菜品列表</h3>
+            <button onclick="showAddDishModal()" class="btn btn-primary">+ 添加菜品</button>
+        </div>
+        
+        <div class="category-filter">
+            <button class="filter-btn active" onclick="filterDishes('all')">全部</button>
+            <button class="filter-btn" onclick="filterDishes('热菜')">热菜</button>
+            <button class="filter-btn" onclick="filterDishes('凉菜')">凉菜</button>
+            <button class="filter-btn" onclick="filterDishes('汤羹')">汤羹</button>
+            <button class="filter-btn" onclick="filterDishes('主食')">主食</button>
+            <button class="filter-btn" onclick="filterDishes('酒水')">酒水</button>
+        </div>
+        
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>菜品名称</th>
+                    <th>分类</th>
+                    <th>价格</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="dishes-table"></tbody>
+        </table>
+    </div>
+    
+    <!-- 营收统计 -->
+    <div id="revenue-tab" class="tab-content">
+        <div class="revenue-summary">
+            <div class="summary-card">
+                <div class="summary-label">账单总数</div>
+                <div class="summary-value" id="bill-count">0</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label">总额合计</div>
+                <div class="summary-value" id="total-sum">¥0.00</div>
+            </div>
+            <div class="summary-card primary">
+                <div class="summary-label">实际营收</div>
+                <div class="summary-value" id="actual-sum">¥0.00</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label">折扣总额</div>
+                <div class="summary-value" id="discount-sum">¥0.00</div>
+            </div>
+        </div>
+        
+        <h3>账单明细</h3>
+        <div id="bills-list" class="bills-list"></div>
+    </div>
+</div>
+
+<!-- 添加菜品模态框 -->
+<div id="add-dish-modal" class="modal">
+    <div class="modal-content modal-lg">
+        <div class="modal-header">
+            <span class="modal-title">添加菜品</span>
+            <span class="modal-close" onclick="closeAddDishModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="add-dish-form">
+                <div class="form-group">
+                    <label>菜品名称</label>
+                    <input type="text" id="dish-name" required>
+                </div>
+                <div class="form-group">
+                    <label>菜品分类</label>
+                    <select id="dish-category" required>
+                        <option value="热菜">热菜</option>
+                        <option value="凉菜">凉菜</option>
+                        <option value="汤羹">汤羹</option>
+                        <option value="主食">主食</option>
+                        <option value="酒水">酒水</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>价格</label>
+                    <input type="number" id="dish-price" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label>口味选项</label>
+                    <div id="flavor-rounds"></div>
+                    <button type="button" onclick="addFlavorRound()" class="btn btn-sm">+ 添加口味轮次</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button onclick="closeAddDishModal()" class="btn">取消</button>
+            <button onclick="submitDish()" class="btn btn-primary">添加</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/manager.js"></script>
+{% endblock %}

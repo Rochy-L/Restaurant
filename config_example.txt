@@ -1,0 +1,8 @@
+# Supabase 配置说明
+# 请在项目根目录创建 .env 文件并填入以下配置
+
+# Supabase 项目 URL
+SUPABASE_URL=https://your-project-id.supabase.co
+
+# Supabase service_role key (用于后端操作，具有完全权限)
+SUPABASE_KEY=your-service-role-key

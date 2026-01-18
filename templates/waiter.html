@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}服务员端 - 聚香园{% endblock %}
+{% block nav_title %}服务员端{% endblock %}
+
+{% block content %}
+<div class="waiter-page">
+    <div class="sidebar">
+        <h3>桌位管理</h3>
+        <div id="tables-list" class="tables-list"></div>
+        <button onclick="refreshTables()" class="btn btn-block">刷新桌位</button>
+    </div>
+    
+    <div class="main-panel">
+        <!-- 未选择桌位 -->
+        <div id="no-table-selected" class="empty-state">
+            <p>请从左侧选择一个桌位进行操作</p>
+        </div>
+        
+        <!-- 已选择桌位 -->
+        <div id="table-panel" style="display:none;">
+            <div class="panel-header">
+                <h2>桌位 <span id="selected-table-id"></span> - <span id="selected-table-status"></span></h2>
+                <div class="panel-actions">
+                    <button id="btn-open" onclick="openTable()" class="btn btn-success">开台</button>
+                    <button id="btn-clean" onclick="cleanTable()" class="btn btn-warning">清理完成</button>
+                </div>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="switchWaiterTab('order')">点菜</button>
+                <button class="tab" onclick="switchWaiterTab('current')">当前订单</button>
+                <button class="tab" onclick="switchWaiterTab('confirmed')">已确认订单</button>
+                <button class="tab" onclick="switchWaiterTab('checkout')">结账</button>
+            </div>
+            
+            <!-- 点菜 -->
+            <div id="order-tab" class="tab-content active">
+                <div class="menu-grid" id="waiter-menu"></div>
+            </div>
+            
+            <!-- 当前订单 -->
+            <div id="current-tab" class="tab-content">
+                <div id="current-order-items"></div>
+                <div class="order-actions">
+                    <button onclick="confirmCurrentOrder()" class="btn btn-primary">确认订单(提交后厨)</button>
+                </div>
+            </div>
+            
+            <!-- 已确认订单 -->
+            <div id="confirmed-tab" class="tab-content">
+                <div id="confirmed-orders"></div>
+            </div>
+            
+            <!-- 结账 -->
+            <div id="checkout-tab" class="tab-content">
+                <div id="checkout-summary"></div>
+                <div class="checkout-actions">
+                    <h4>选择折扣:</h4>
+                    <div class="discount-options">
+                        <label><input type="radio" name="discount" value=""> 不打折</label>
+                        <label><input type="radio" name="discount" value="八折"> 整单8折</label>
+                        <label><input type="radio" name="discount" value="抹零"> 抹零</label>
+                    </div>
+                    <button onclick="doCheckout()" class="btn btn-success btn-lg">确认结账</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/waiter.js"></script>
+{% endblock %}

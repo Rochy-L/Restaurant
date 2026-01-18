@@ -1,0 +1,23 @@
+# 聚香园餐厅点餐系统 - Python依赖
+# 使用 pip install -r requirements.txt 安装
+
+# Supabase Python客户端
+supabase>=2.0.0
+
+# HTTP请求库（supabase依赖）
+httpx>=0.25.0
+
+# 环境变量管理
+python-dotenv>=1.0.0
+
+# 表格美化输出（控制台版）
+tabulate>=0.9.0
+
+# 颜色输出（控制台版）
+colorama>=0.4.6
+
+# Web框架
+flask>=3.0.0
+
+# 跨域支持
+flask-cors>=4.0.0
